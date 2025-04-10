@@ -1,0 +1,13 @@
+FUNCTION MatrixChainOrder(p, n):
+    CREATE 2D array dp[n][n] and initialize all values to 0
+
+    FOR chainLength FROM 2 TO n - 1:
+        FOR i FROM 1 TO n - chainLength:
+            j = i + chainLength - 1
+            dp[i][j] = INFINITY
+            FOR k FROM i TO j - 1:
+                cost = dp[i][k] + dp[k+1][j] + p[i-1] * p[k] * p[j]
+                IF cost < dp[i][j]:
+                    dp[i][j] = cost
+
+    RETURN dp[1][n - 1]
